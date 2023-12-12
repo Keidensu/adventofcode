@@ -11,15 +11,15 @@ def advent3():
 
     for i in range(len(l)):
         nums = dict((m.start(), m.group()) for m in re.finditer(r'\d+', l[i]))
-        syms = dict((m.start(), m.group()) for m in re.finditer(r'[^a-zA-Z0-9\.]', l[i]))
+        syms = dict((m.start(), m.group()) for m in re.finditer(r'[^0-9\.]', l[i]))
         symsdown = {}
         symsup = {}
 
         if i != len(l) - 1:
-            symsdown = dict((m.start(), m.group()) for m in re.finditer(r'[^a-zA-Z0-9\.]', l[i+1]))
+            symsdown = dict((m.start(), m.group()) for m in re.finditer(r'[^0-9\.]', l[i+1]))
 
         if i != 0:
-            symsup = dict((m.start(), m.group()) for m in re.finditer(r'[^a-zA-Z0-9\.]', l[i-1]))
+            symsup = dict((m.start(), m.group()) for m in re.finditer(r'[^0-9\.]', l[i-1]))
         
         for num in nums:
             begin = num - 1

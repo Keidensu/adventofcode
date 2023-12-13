@@ -1,14 +1,26 @@
+import re
+
 def advent4():
     f = open("input4.txt")
     l=f.readlines()
     l = [word.strip("\n") for word in l]
+
+    games = {}
+
     sum = 0
 
     for line in l:
+        line = line.strip().split(":")
+        gamenum = int(re.split("\s+", line[0])[1])
+        
+        if gamenum not in games:
+            games[gamenum] = 1
+        else:
+            games[gamenum] += 1
+        
         wins = 0
-        line = line.split(":")[1]
-        winners = line.split("|")[0].strip().split(" ")
-        numbers = line.split("|")[1].strip().split(" ")
+        winners = line[1].split("|")[0].strip().split(" ")
+        numbers = line[1].split("|")[1].strip().split(" ")
 
         for num in numbers:
             if num == "":
@@ -16,8 +28,19 @@ def advent4():
             if num in winners:
                 wins += 1
         
-        wins -= 1
-        sum += int(2**wins)
+        
+        for i in range(1, wins+1):
+            for k in range(games[gamenum]):
+                if gamenum+i not in games:
+                    games[gamenum+i] = 1
+                else:
+                    games[gamenum+i] += 1
+                
+        
+    print(games)
+        
+    for num in games:
+        sum += games[num]
 
     print(sum)
 

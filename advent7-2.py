@@ -26,42 +26,35 @@ def advent7():
         if len(handsplit) == 1:
             five.append((hand, bid))
         elif len(handsplit) == 2:
-            if 0 in handsplit:
-                if handsplit[0] == 4:
+            if "0" in handsplit:
+                five.append((hand,bid))
+            else:
+                if 4 in handsplit.values():
                     four.append((hand, bid))
                 else:
-                    five.append((hand, bid))
-
-            if 4 in handsplit.values():
-                four.append((hand, bid))
-            else:
-                drhouse.append((hand, bid))
+                    drhouse.append((hand, bid))
         elif len(handsplit) == 3:
             if 3 in handsplit.values():
-                if 0 in handsplit:
-                    if handsplit[0] == 1 or handsplit[0] == 3:
-                        four.append((hand, bid))
-                    else:
-                        five.append((hand, bid))
-                    
+                if "0" in handsplit:
+                    four.append((hand, bid))
                 else:
                     three.append((hand, bid))
             else:
-                if 0 in handsplit:
-                    if handsplit[0] == 1:
-                        three.append((hand,bid))
+                if "0" in handsplit:
+                    if handsplit["0"] == 1:
+                        drhouse.append((hand,bid))
                     else:
                         four.append((hand, bid))
                 else:
                     two.append((hand, bid))
         elif len(handsplit) == 4:
-            if 0 in handsplit:
-                two.append((hand,bid))
+            if "0" in handsplit:
+                three.append((hand,bid))
             else:
                 one.append((hand, bid))
         else:
-            if 0 in handsplit:
-                two.append(hand, bid)
+            if "0" in handsplit:
+                one.append((hand, bid))
             else:
                 high.append((hand, bid))
         

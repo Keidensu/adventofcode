@@ -14,23 +14,34 @@ def advent8():
     for line in l:
         line = line.split("=")
         origin = line[0].strip()
-        dests = line[1].strip()
+        dests = line[1].strip().replace("(", "").replace(")", "").split(", ")
+        dests = (dests[0], dests[1])
         tree[origin] = dests
 
     i = 0
+    count = 0
+    curr = "AAA"
 
     while reachedz == False:
         if i >= len(directions):
             i = 0
-        
-        
 
+        if curr == "ZZZ":
+            reachedz = True
+            break
+
+        d = directions[i]
+        
+        if d == "L":
+            curr = tree[curr][0]
+        else:
+            curr = tree[curr][1]
+
+        count += 1
         i += 1
 
 
+    print(count)
 
 if __name__ == "__main__":
     advent8()
-
-    # left = line[1].split(", ")[0].replace("(", "").strip()
-    # right = line[1].split(", ")[1].replace(")", "").strip()
